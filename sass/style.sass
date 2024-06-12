@@ -1,0 +1,632 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;900&display=swap')
+
+$transition: .3s
+
+$color-white: #FFF
+$color-body: #F2EDFF
+$color-violet: #6539D9
+$color-violet2: #440FCF
+$color-dark: #1D253F
+$color-count: #4E5778
+$color-placeholder: #838BAD
+
+
+*
+	outline: none !important
+
+img 
+	max-width: 100%
+	height: auto
+
+body 
+	font-family: 'Inter', sans-serif
+	background-color: $color-body
+	color: $color-dark
+	min-height: 100vh
+	display: flex 
+	flex-direction: column
+
+a 
+	text-decoration: none !important
+	transition: $transition
+	color: $color-dark
+	&:hover 
+		color: initial
+		opacity: .7
+
+.btn
+	&:focus
+		box-shadow: none
+
+.container 
+	@media (min-width: 1400px)
+		max-width: 1380px
+	@media (max-width: 575.98px)
+		padding-left: 20px
+		padding-right: 20px
+
+.row-6
+	margin-left: -6px
+	margin-right: -6px
+	> [class*='col']
+		padding-left: 6px
+		padding-right: 6px
+
+.row-8
+	margin-left: -8px
+	margin-right: -8px
+	> [class*='col']
+		padding-left: 8px
+		padding-right: 8px
+
+.form-group
+	margin-bottom: 16px
+
+.fz-14
+	font-size: 14px !important
+
+.h1, h1
+	font-size: 56px
+	font-weight: 900
+	@media (max-width: 767.98px)
+		font-size: 44px
+
+.h1-comment
+	font-weight: bold
+
+.h3, h3
+	font-size: 20px
+	font-weight: bold
+	margin-bottom: 40px
+	position: relative
+	.number 
+		position: absolute
+		color: $color-violet
+		left: -25px
+		@media (max-width: 767.98px)
+			left: 0
+			top: -30px
+
+.progress-line
+	background: $color-body
+	height: 4px
+	position: relative
+	&:before 
+		content: ""
+		position: absolute 
+		top: 0
+		left: 0
+		right: 0
+		bottom: 0
+		background: $color-violet2
+		width: 79%
+		@media (max-width: 767.98px)
+			width: 26%
+
+.header
+	padding: 16px 0
+	margin-bottom: 24px
+	.logo 
+		img 
+			width: 75px
+			@media (max-width: 575.98px)
+				width: 62px
+	.brand
+		display: inline-flex
+		font-weight: bold 
+		@media (max-width: 575.98px)
+			font-size: 14px
+		img 
+			width: 32px
+
+.main-section, .steps
+	display: flex 
+	flex-direction: column
+	flex-grow: 1
+
+.main-content
+	margin-bottom: 60px
+	margin-top: auto
+	margin-bottom: auto
+
+.likely-box
+	display: flex
+	margin-bottom: 48px
+	@media (max-width: 767.98px)
+		justify-content: center
+	.radio-group
+		display: inline-block
+		font-size: 14px
+		position: relative
+		&:not(:last-child)
+			@media (min-width: 768px)
+				margin-right: 18px
+		@media (max-width: 575.98px)
+			flex-grow: 1
+		input
+			display: none
+			~ span
+				padding: 4px
+				display: inline-block
+				width: 36px
+				height: 36px
+				border: 1px solid $color-violet
+				border-radius: 8px
+				text-align: center
+				line-height: 28px
+				color: $color-violet
+				cursor: pointer
+				@media (max-width: 767.98px)
+					border-radius: 0
+				@media (max-width: 575.98px)
+					width: 100%
+					padding: 2px
+					font-size: 12px
+			&:checked, &:hover
+				~ span
+					transition: $transition
+					background: $color-violet
+					font-weight: bold
+					color: $color-white
+		@media (max-width: 767.98px)
+			&:first-child
+				span
+					border-radius: 6px 0 0 6px
+			&:last-child
+				span
+					border-radius: 0 6px 6px 0
+			&:not(:last-child)
+				span
+					border-right: 0
+
+.likely-link
+	position: absolute
+	bottom: -36px
+	cursor: pointer
+	white-space: nowrap
+	color: $color-violet
+	&.link-right
+		right: 0
+
+.footer
+	margin-top: auto
+	padding: 48px 0
+	text-align: center
+	@media (max-width: 575.98px)
+		padding: 20px 0
+
+.pagination-box
+	font-size: 14px
+	.arrows-box
+		display: inline-block
+		vertical-align: middle
+		.arrow
+			display: inline-block
+			background: $color-white
+			border-radius: 8px
+			width: 24px
+			height: 24px
+			text-align: center
+			padding: 4px 
+			line-height: 16px
+			&:hover
+				background: $color-violet2
+				opacity: 1 
+				svg path
+					fill: $color-white
+			&.disabled 
+				opacity: .6
+				pointer-events: none
+
+.btn-next
+	color: $color-white
+	background: $color-violet
+	border: 0
+	padding: 10px 34px
+	transition: $transition
+	font-size: 14px
+	border-radius: 8px
+	text-align: center
+	font-weight: bold
+	@media (max-width: 575.98px)
+		width: 100%
+	&:hover, &:active
+		opacity: 1
+		color: $color-white !important
+		background: $color-violet2 !important
+
+.btn-prev
+	border: 1px solid #AF91FF
+	padding: 7.5px
+	transition: $transition
+	border-radius: 8px
+	width: 41px
+	height: 41px
+	line-height: 24px
+	text-align: center
+	font-size: 0
+	&:hover, &:active
+		opacity: 1
+		color: $color-white !important
+		border-color: $color-violet2 !important
+		background: $color-violet2 !important
+		svg path 
+			fill: $color-white
+
+.copywright
+	font-size: 14px
+	color: $color-count
+	@media (max-width: 575.98px)
+		font-size: 12px
+	.link-brand
+		color: $color-violet2
+
+.form-textarea 
+	height: 220px !important
+	resize: none
+	background: $color-white
+	border-radius: 8px
+	color: $color-dark
+	border: 1px solid $color-placeholder
+	font-size: 14px
+	padding: 12px 16px 48px
+	&::-webkit-input-placeholder
+		color: $color-placeholder
+	&::-moz-placeholder
+		color: $color-placeholder
+	&:-ms-input-placeholder
+		color: $color-placeholder
+	&:focus
+		box-shadow: none
+		border-color: $color-placeholder
+
+.the-count-1000
+	position: absolute
+	color: #C4C9D9
+	bottom: 12px
+	right: 16px
+	display: inline-block
+	font-size: 12px
+	transition: $transition
+
+.the-count-100
+	color: $color-count
+	font-size: 12px
+	text-align: right
+
+.audio-buttons
+	background: $color-white
+	border-radius: 8px
+	padding: 16px
+	a 
+		display: inline-block
+		transition: $transition
+		svg path 
+			transition: $transition
+		&:hover 
+			opacity: 1 
+			svg path 
+				fill: $color-violet2
+
+.my-tooltip
+	text-transform: uppercase
+	font-size: 10px
+	color: $color-white
+	font-weight: bold
+	--bs-tooltip-bg: $color-dark
+
+.label-store
+	margin-bottom: 14px
+	font-size: 14px
+	color: $color-count
+	cursor: pointer
+
+.label-agreement
+	color: $color-dark
+
+input[type="checkbox"], input[type="radio"]
+	display: none
+	~ .f
+		display: inline-block
+		width: 16px
+		height: 16px
+		cursor: pointer
+		border: 1px solid $color-placeholder
+		border-radius: 100px
+		position: relative
+	&:checked
+		~ .f
+			transition: $transition
+			background: $color-violet
+			border-color: $color-violet
+			color: $color-violet
+			&:before 
+				content: ''
+				position: absolute
+				top: 50%
+				left: 50%
+				transform: translate(-50%, -50%)
+			~ span 
+				font-weight: bold
+
+input[type="radio"]
+	&:checked
+		~ .f
+			&:before 
+				width: 7px	
+				height: 7px
+				background: $color-white
+				border-radius: 100px
+
+input[type="checkbox"]
+	~ .f
+		border-radius: 4px
+	&:checked
+		~ .f
+			&:before 
+				width: 16px
+				height: 16px
+				background-image: url(../img/check.svg)
+				background-position: center center
+				background-repeat: no-repeat
+
+.input-text
+	font-size: 14px
+	padding: 8px 16px
+	border: 1px solid $color-placeholder
+	border-radius: 8px
+	height: 40px
+	color: $color-dark
+	&::-webkit-input-placeholder
+		color: #7C85A6
+	&::-moz-placeholder
+		color: #7C85A6
+	&:-ms-input-placeholder
+		color: #7C85A6
+	&:focus
+		box-shadow: none
+		border-color: $color-placeholder
+
+.label
+	font-size: 12px
+	color: $color-placeholder
+	margin-bottom: 8px
+
+.input-small
+	@media (min-width: 576px)
+		max-width: 280px
+
+.datepicker
+	padding: 8px 16px 8px 30px
+	cursor: pointer
+	&:focus
+		~ svg path 
+			fill: $color-violet2
+
+.img-calendar
+	position: absolute 
+	top: 50%
+	left: 8px
+	transform: translateY(-50%)
+	pointer-events: none
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button 
+	-webkit-appearance: none
+	margin: 0
+input[type=number] 
+	-moz-appearance:textfield
+
+.title-feedback
+	font-weight: 900
+	font-size: 56px
+	color: $color-dark
+	line-height: 1.2
+	@media (max-width: 767.98px)
+		font-size: 32px
+		text-align: center
+
+.feedback-box
+	position: relative
+	z-index: 2
+	@media (max-width: 767.98px)
+		text-align: center
+	@media (max-width: 575.98px)
+		&:before
+			content: ""
+			position: absolute
+			z-index: 1
+			top: 0
+			left: -20px
+			right: -20px
+			bottom: 0
+			background-size: cover 
+			background-position: center center
+			background-repeat: no-repeat
+			background-image: url(../img/bg-feedback.png)
+
+
+// CALENDAR
+
+.ui-widget
+	font-family: inherit
+	input, select, textarea, button
+		font-family: inherit
+
+.ui-widget-content
+	border-color: $color-placeholder !important
+	border-radius: 8px
+	padding: 16px
+	min-width: 280px
+	@media (max-width: 575.98px)
+		width: calc(100% - 40px)
+
+.ui-datepicker
+	.ui-state-default
+		font-size: 14px
+		background: none
+		border: none
+		&:hover
+			color: $color-white !important
+			background-color: $color-violet
+			font-weight: bold
+			opacity: 1
+	td
+		span, a
+			width: 30px
+			height: 30px
+			padding: 0
+			line-height: 30px
+			border-radius: 5px
+			text-align: center
+	.ui-state-active
+		color: $color-white !important
+		background-color: $color-violet
+		font-weight: bold
+	.ui-state-highlight
+		color: $color-white !important
+		background-color: $color-dark
+		font-weight: bold
+	.ui-datepicker-buttonpane
+		margin: 0
+		button
+			margin: .5em .2em
+			padding: .2em .3em
+			transition: $transition
+	.ui-datepicker-title 
+		line-height: inherit
+		select
+			-webkit-appearance: none
+			-moz-appearance: none
+			appearance: none
+			font-size: 14px
+			margin: 1px 0
+			font-weight: bold
+			border: 0
+			height: 26px
+			padding: 1px 10px
+			cursor: pointer
+			width: auto
+			line-height: 1
+			background-position: calc(100% - 7px) center
+			background-size: 7px
+			&::-ms-expand
+				display: none
+
+.ui-datepicker-header
+	border: none
+	border-radius: 0
+	background: none
+
+.ui-datepicker-calendar
+	thead 
+		th 
+			color: $color-placeholder !important
+			font-weight: normal !important
+
+.ui-datepicker-prev, .ui-datepicker-next
+	top: 50% !important
+	transform: translateY(-50%)
+	border: none !important
+	background: none !important
+	cursor: pointer
+	span
+		background: none !important
+		font-size: 12px
+		transition: $transition
+		width: 6px
+		height: 10px
+		margin: 0 !important
+		transform: translate(-50%, -50%) !important
+		&:before
+			content: ""
+			width: 100%
+			height: 100%
+			position: absolute
+			top: 0
+			left: 50%
+			transform: translateX(-50%)
+			background-size: cover 
+			background-position: center center
+			background-repeat: no-repeat
+
+
+.ui-datepicker-prev
+	span:before
+		background-image: url(../img/calendar-left.svg)
+	&:hover span
+		transform: translateX(-2px)
+.ui-datepicker-next
+	span:before
+		background-image: url(../img/calendar-right.svg)
+	&:hover span
+		transform: translateX(2px)
+
+// SELECT2
+
+.select2-container
+	display: block
+	width: auto !important
+	min-width: 140px !important	
+	@media (min-width: 576px)
+		max-width: 280px !important
+	.select2-selection--single
+		background: $color-white
+		border: 1px solid $color-placeholder
+		padding-left: 16px
+		padding-right: 26px
+		transition: $transition
+		height: 40px
+		.select2-selection__rendered
+			padding-left: 0
+			padding-right: 0
+	.selection
+		display: block
+.select2-container--default .select2-selection--single
+	border-radius: 8px !important
+	.select2-selection__rendered, .select2-selection__placeholder
+		color: $color-dark
+		line-height: 38px
+		font-size: 14px
+	.select2-selection__clear
+		display: none
+	.select2-selection__arrow
+		height: 5px
+		width: 8px
+		right: 12px
+		top: 50%
+		transform: translateY(-50%)
+		background-image: url(../img/arrow-select.svg)
+		background-size: cover
+		b 
+			display: none
+.select2-container--open 
+	.select2-dropdown
+		border: 1px solid $color-placeholder
+		border-radius: 8px
+		overflow: hidden
+		top: 16px
+		padding: 0
+		.select2-search--dropdown
+			display: none
+		.select2-results
+			.select2-results__options
+				max-height: 100px
+				&::-webkit-scrollbar
+					width: 4px
+					height: 4px
+				&::-webkit-scrollbar-track
+					background-color: transparent
+					border-radius: 2px
+				&::-webkit-scrollbar-thumb
+					background-color: $color-body
+					border-radius: 2px	
+				.select2-results__option
+					font-size: 14px
+					padding: 4px 16px
+					color: $color-count
+					background-color: transparent
+				.select2-results__option--highlighted.select2-results__option--selectable
+					background: transparent
+					&:hover, &.select2-results__option--selected, &.select2-results__option--highlighted.select2-results__option--selectable
+						background-color: $color-body
