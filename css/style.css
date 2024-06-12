@@ -80,7 +80,8 @@ a {
 .progress-line {
   background: #F2EDFF;
   height: 4px;
-  position: relative; }
+  position: relative;
+  transition: 0.3s; }
   .progress-line:before {
     content: "";
     position: absolute;
@@ -89,10 +90,8 @@ a {
     right: 0;
     bottom: 0;
     background: #440FCF;
-    width: 79%; }
-    @media (max-width: 767.98px) {
-      .progress-line:before {
-        width: 26%; } }
+    width: 11%;
+    transition: 0.3s; }
 
 .header {
   padding: 16px 0;
@@ -111,10 +110,19 @@ a {
     .header .brand img {
       width: 32px; }
 
-.main-section, .steps {
+.main-section {
   display: flex;
   flex-direction: column;
   flex-grow: 1; }
+
+.steps {
+  display: flex;
+  flex-direction: column; }
+  .steps .step-1 {
+    display: flex; }
+  .steps > [class*='step'] {
+    flex-direction: column;
+    flex-grow: 1; }
 
 .main-content {
   margin-bottom: 60px;
@@ -308,7 +316,7 @@ a {
   font-size: 10px;
   color: #FFF;
   font-weight: bold;
-  --bs-tooltip-bg: $color-dark; }
+  --bs-tooltip-bg: #1D253F; }
 
 .label-store {
   margin-bottom: 14px;
@@ -608,5 +616,64 @@ input::-webkit-inner-spin-button {
       background: transparent; }
       .select2-container--open .select2-dropdown .select2-results .select2-results__options .select2-results__option--highlighted.select2-results__option--selectable:hover, .select2-container--open .select2-dropdown .select2-results .select2-results__options .select2-results__option--highlighted.select2-results__option--selectable.select2-results__option--selected, .select2-container--open .select2-dropdown .select2-results .select2-results__options .select2-results__option--highlighted.select2-results__option--selectable.select2-results__option--highlighted.select2-results__option--selectable {
         background-color: #F2EDFF; }
+
+.step-2, .step-3, .step-4, .step-5, .step-6, .step-7, .step-8, .step-9 {
+  display: none; }
+
+.step-2-active .progress-line:before {
+  width: 22.2222222222%; }
+.step-2-active .steps .step-1 {
+  display: none; }
+.step-2-active .steps .step-2 {
+  display: flex; }
+
+.step-3-active .progress-line:before {
+  width: 33.3333333333%; }
+.step-3-active .steps .step-2 {
+  display: none; }
+.step-3-active .steps .step-3 {
+  display: flex; }
+
+.step-4-active .progress-line:before {
+  width: 44.4444444444%; }
+.step-4-active .steps .step-3 {
+  display: none; }
+.step-4-active .steps .step-4 {
+  display: flex; }
+
+.step-5-active .progress-line:before {
+  width: 55.5555555556%; }
+.step-5-active .steps .step-4 {
+  display: none; }
+.step-5-active .steps .step-5 {
+  display: flex; }
+
+.step-6-active .progress-line:before {
+  width: 66.6666666667%; }
+.step-6-active .steps .step-5 {
+  display: none; }
+.step-6-active .steps .step-6 {
+  display: flex; }
+
+.step-7-active .progress-line:before {
+  width: 77.7777777778%; }
+.step-7-active .steps .step-6 {
+  display: none; }
+.step-7-active .steps .step-7 {
+  display: flex; }
+
+.step-8-active .progress-line:before {
+  width: 88.8888888889%; }
+.step-8-active .steps .step-7 {
+  display: none; }
+.step-8-active .steps .step-8 {
+  display: flex; }
+
+.step-9-active .progress-line:before {
+  width: 100%; }
+.step-9-active .steps .step-8 {
+  display: none; }
+.step-9-active .steps .step-9 {
+  display: flex; }
 
 /*# sourceMappingURL=style.css.map */

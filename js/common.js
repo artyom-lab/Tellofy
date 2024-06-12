@@ -3,10 +3,6 @@ $(document).ready(function () {
 const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]')
 const tooltipList = [...tooltipTriggerList].map(tooltipTriggerEl => new bootstrap.Tooltip(tooltipTriggerEl))
 
-  Waves.attach('.btn');
-  Waves.attach('.btn-light',  ['waves-light']);
-  Waves.init();
-
   $('#count-100').keyup(function() {  
     var characterCount = $(this).val().length,
     current = $('#current-100'),
@@ -34,6 +30,29 @@ const tooltipList = [...tooltipTriggerList].map(tooltipTriggerEl => new bootstra
       of: $(this)
     });
   });
+
+// STEPS
+
+function scrollToTop() {
+  $('html, body').animate({ scrollTop: 0 });
+}
+
+function setActiveStep(step) {
+  $("body").addClass("step-" + step + "-active");
+  scrollToTop();
+}
+
+for (let i = 2; i <= 9; i++) {
+  $(`#tostep-${i}, #tostep-${i}b`).on("click", () => setActiveStep(i));
+}
+
+for (let i = 1; i <= 7; i++) {
+  $(`#backstep-${i}, #backstep-${i}b`).on("click", event => {
+    $("body").removeClass(`step-${i + 1}-active`);
+    scrollToTop();
+    event.preventDefault();
+  });
+}
 
  // SELECT2
 

@@ -91,6 +91,7 @@ a
 	background: $color-body
 	height: 4px
 	position: relative
+	transition: $transition
 	&:before 
 		content: ""
 		position: absolute 
@@ -99,9 +100,8 @@ a
 		right: 0
 		bottom: 0
 		background: $color-violet2
-		width: 79%
-		@media (max-width: 767.98px)
-			width: 26%
+		width: 11%
+		transition: $transition
 
 .header
 	padding: 16px 0
@@ -119,10 +119,19 @@ a
 		img 
 			width: 32px
 
-.main-section, .steps
+.main-section
 	display: flex 
 	flex-direction: column
 	flex-grow: 1
+
+.steps
+	display: flex 
+	flex-direction: column
+	.step-1
+		display: flex
+	> [class*='step']
+		flex-direction: column
+		flex-grow: 1
 
 .main-content
 	margin-bottom: 60px
@@ -313,7 +322,7 @@ a
 	font-size: 10px
 	color: $color-white
 	font-weight: bold
-	--bs-tooltip-bg: $color-dark
+	--bs-tooltip-bg: #1D253F
 
 .label-store
 	margin-bottom: 14px
@@ -630,3 +639,19 @@ input[type=number]
 					background: transparent
 					&:hover, &.select2-results__option--selected, &.select2-results__option--highlighted.select2-results__option--selectable
 						background-color: $color-body
+
+// STEPS 
+
+.step-2, .step-3, .step-4, .step-5, .step-6, .step-7, .step-8, .step-9
+	display: none
+
+@for $i from 2 through 9
+	.step-#{$i}-active
+		.progress-line
+			&:before
+				width: percentage($i/9)
+		.steps
+			.step-#{$i - 1}
+				display: none
+			.step-#{$i}
+				display: flex
