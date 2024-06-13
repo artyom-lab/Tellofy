@@ -47,39 +47,30 @@ for (let i = 1; i <= 7; i++) {
 const form1 = document.getElementById('form1');
 const btn1 = document.getElementById('tostep-2');
 const arrow1 = document.getElementById('tostep-2b');
-const radioInputs = form1.querySelectorAll('input[type="radio"]');
-radioInputs.forEach(input => {
-  input.addEventListener('change', function() {
-    btn1.disabled = false;
-    arrow1.classList.remove('disabled');
-  });
+form1.addEventListener('change', () => {
+  btn1.disabled = false;
+  arrow1.classList.remove('disabled');
 });
 
 // STEP-2
-const form2 = document.getElementById('form2');
+const textarea = document.querySelector("#form2 .form-textarea");
 const btn2 = document.getElementById('tostep-3');
 const arrow2 = document.getElementById('tostep-3b');
-const textarea = form2.querySelector(".form-textarea");
-textarea.addEventListener("input", function() {
-  if (textarea.value.trim() !== "") {
-    btn2.disabled = false;
-    arrow2.classList.remove('disabled');
-  } else {
-    btn2.disabled = true;
-    arrow2.classList.add('disabled');
-  }
+textarea.addEventListener("input", () => {
+  const isTextareaFilled = textarea.value.trim() !== "";
+  btn2.disabled = !isTextareaFilled;
+  arrow2.classList.toggle('disabled', !isTextareaFilled);
 });
 
 // STEP-3
 const form3 = document.getElementById('form3');
 const btn3 = document.getElementById('tostep-4');
 const arrow3 = document.getElementById('tostep-4b');
-const radioInputs2 = form3.querySelectorAll('input[type="radio"]');
-radioInputs2.forEach(input => {
-  input.addEventListener('change', function() {
+form3.addEventListener('change', function(event) {
+  if (event.target.type === 'radio') {
     btn3.disabled = false;
     arrow3.classList.remove('disabled');
-  });
+  }
 });
 
 // STEP-4 / CALENDAR
@@ -88,25 +79,14 @@ $(".datepicker").datepicker({
   changeYear: true,
   dateFormat: "mm/dd/yy",
   onSelect: function(dateText, inst) {
-    // Получаем выбранную дату
     var selectedDate = $(this).datepicker("getDate");
-    // Проверяем, выбрана ли дата
-    if (selectedDate) {
-      // Если выбрана, разблокируем кнопку
-      $("#tostep-5").prop("disabled", false);
-      $("#tostep-5b").removeClass("disabled");
-    } else {
-      // Если дата не выбрана, блокируем кнопку
-      $("#tostep-5").prop("disabled", true);
-      $("#tostep-5b").addClass("disabled");
-    }
+    $("#tostep-5, #tostep-5b").prop("disabled", !selectedDate);
+    $("#tostep-5b").toggleClass("disabled", !selectedDate);
   },
   onClose: function(dateText, inst) {
-    // Проверяем, осталась ли выбранная дата после закрытия календаря
     var selectedDate = $(this).datepicker("getDate");
-    // Если нет выбранной даты и поле ввода пустое, блокируем кнопку
     if (!selectedDate && !$(this).val().trim()) {
-      $("#tostep-5").prop("disabled", true);
+      $("#tostep-5, #tostep-5b").prop("disabled", true);
       $("#tostep-5b").addClass("disabled");
     }
   }
@@ -117,12 +97,9 @@ $(".datepicker").datepicker({
     of: $(this)
   });
 }).keyup(function(event) {
-  // При отпускании клавиши проверяем, был ли это backspace
   if (event.keyCode == 8) {
-    // Очищаем поле ввода
     $(this).val('');
-    // Блокируем кнопку
-    $("#tostep-5").prop("disabled", true);
+    $("#tostep-5, #tostep-5b").prop("disabled", true);
     $("#tostep-5b").addClass("disabled");
   }
 });
@@ -133,100 +110,58 @@ const btn5 = document.getElementById('tostep-6');
 const arrow5 = document.getElementById('tostep-6b');
 const checkInputs = form5.querySelectorAll('input[type="checkbox"]');
 function checkCheckboxes() {
-  let anyCheckboxChecked = false;
-  checkInputs.forEach(input => {
-    if (input.checked) {
-      anyCheckboxChecked = true;
-    }
-  });
-  if (anyCheckboxChecked) {
-    btn5.disabled = false;
-    arrow5.classList.remove('disabled');
-  } else {
-    btn5.disabled = true;
-    arrow5.classList.add('disabled');
-  }
+  const anyCheckboxChecked = [...checkInputs].some(input => input.checked);
+  btn5.disabled = !anyCheckboxChecked;
+  arrow5.classList.toggle('disabled', !anyCheckboxChecked);
 }
-checkInputs.forEach(input => {
-  input.addEventListener('change', checkCheckboxes);
-});
+checkInputs.forEach(input => input.addEventListener('change', checkCheckboxes));
 checkCheckboxes();
 
+
 // STEP-6
-const selectInputs = document.querySelectorAll('.select2');
-const btn6 = document.getElementById('tostep-7');
-const arrow6 = document.getElementById('tostep-7b');
+const selectInputs = $('.select2');
+const btn6 = $('#tostep-7')[0];
+const arrow6 = $('#tostep-7b')[0];
 function checkSelects() {
-  let anySelected = false;
-  selectInputs.forEach(select => {
-    const selectedValue = $(select).val(); // Получаем выбранное значение с помощью jQuery
-    if (selectedValue !== "") {
-      anySelected = true;
-    }
-  });
+  const anySelected = selectInputs.toArray().some(select => $(select).val() !== "");
   btn6.disabled = !anySelected;
-  if (anySelected) {
-    arrow6.classList.remove('disabled');
-  } else {
-    arrow6.classList.add('disabled');
-  }
+  arrow6.classList.toggle('disabled', !anySelected);
 }
-selectInputs.forEach(select => {
-  $(select).on('select2:select select2:unselect', checkSelects); 
-});
-checkSelects(); 
+selectInputs.on('select2:select select2:unselect', checkSelects);
+checkSelects();
 
 // STEP-7
 const form7 = document.getElementById('form7');
 const btn7 = document.getElementById('tostep-8');
 const arrow7 = document.getElementById('tostep-8b');
 const input1 = form7.querySelectorAll('input');
-
 input1.forEach(input => {
-  input.addEventListener("input", function() {
+  input.addEventListener("input", () => {
     let isInputFilled = true;
     input1.forEach(input => {
       if (input.value.trim() === "") {
         isInputFilled = false;
       }
     });
-
-    if (isInputFilled) {
-      btn7.disabled = false;
-      arrow7.classList.remove('disabled');
-    } else {
-      btn7.disabled = true;
-      arrow7.classList.add('disabled');
-    }
+    btn7.disabled = !isInputFilled;
+    arrow7.classList.toggle('disabled', !isInputFilled);
   });
 });
 
 // STEP-8
-$(document).ready(function() {
-  const form8 = $('#form8');
-  const btn8 = $('#tostep-9');
-  const arrow8 = $('#tostep-9b');
-  const input2 = form8.find('input');
-  const checkbox = $('.label-agreement input'); 
-  function updateButtonState() {
-    let isInputFilled = true;
-    input2.each(function() {
-      if ($(this).val().trim() === "") {
-          isInputFilled = false;
-      }
-    });
-
-    if (isInputFilled && checkbox.prop('checked')) {
-      btn8.prop('disabled', false);
-      arrow8.removeClass('disabled');
-    } else {
-      btn8.prop('disabled', true);
-      arrow8.addClass('disabled');
-    }
+const form8 = $('#form8');
+const btn8 = $('#tostep-9');
+const arrow8 = $('#tostep-9b');
+const input2 = form8.find('input');
+const checkbox = $('.label-agreement input'); 
+function updateButtonState() {
+  const isInputFilled = input2.toArray().every(input => $(input).val().trim() !== "");
+  const isCheckboxChecked = checkbox.prop('checked');
+  btn8.prop('disabled', !(isInputFilled && isCheckboxChecked));
+  arrow8.toggleClass('disabled', !(isInputFilled && isCheckboxChecked));
   }
   input2.on("input", updateButtonState);
   checkbox.on("change", updateButtonState);
-});
 
  // SELECT2
 (function($) {
