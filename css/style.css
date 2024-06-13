@@ -236,6 +236,9 @@ a {
     opacity: 1;
     color: #FFF !important;
     background: #440FCF !important; }
+  .btn-next:disabled {
+    background: #CCB8FF !important;
+    color: #FFF !important; }
 
 .btn-prev {
   border: 1px solid #AF91FF;
