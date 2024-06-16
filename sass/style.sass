@@ -6,6 +6,7 @@ $color-white: #FFF
 $color-body: #F2EDFF
 $color-violet: #6539D9
 $color-violet2: #440FCF
+$color-lightviolet: #AF91FF
 $color-dark: #1D253F
 $color-count: #4E5778
 $color-placeholder: #838BAD
@@ -62,6 +63,8 @@ a
 .form-group
 	margin-bottom: 16px
 
+.fz-0
+	font-size: 0px !important
 .fz-14
 	font-size: 14px !important
 
@@ -86,6 +89,10 @@ a
 		@media (max-width: 767.98px)
 			left: 0
 			top: -30px
+
+.h4, h4
+	font-size: 16px
+	font-weight: bold
 
 .progress-line
 	background: $color-body
@@ -248,7 +255,7 @@ a
 		color: $color-white !important
 
 .btn-prev
-	border: 1px solid #AF91FF
+	border: 1px solid $color-lightviolet
 	padding: 7.5px
 	transition: $transition
 	border-radius: 8px
@@ -658,3 +665,147 @@ input[type=number]
 				display: none
 			.step-#{$i}
 				display: flex
+
+// AUDIO RECORDER
+
+.audio-recording
+	background: $color-white
+	border-radius: 8px
+	padding: 8px 16px
+	.message
+		text-align: center
+		background: $color-body
+		border-radius: 100px
+		font-size: 10px
+		padding: 4px 16px
+		margin-bottom: 12px
+	&.orange 
+		.message
+			background: #FFEBDC
+		#recordTimeDisplay
+			color: #FF6B00
+	&.red 
+		.message
+			background: #FFDCDC
+		#recordTimeDisplay
+			color: #FF3E4A
+
+.audiorecorder
+	> [class*='col']
+		@media (min-width: 576px)
+			&:first-child
+				border-right: 1px solid #E1E5F0
+			&:last-child
+				border-left: 1px solid #E1E5F0
+
+.btn-delete, .btn-transform
+	svg path 
+		transition: $transition
+	&:hover 
+		opacity: 1
+		svg path 
+			fill: $color-violet
+
+.btn-record, .btn-play, .btn-transform, .btn-delete
+	width: 20px
+	height: 20px
+	display: inline-block
+	text-align: center 
+	line-height: 20px
+	font-size: 0
+
+#waveform
+	cursor: pointer
+
+#recordTimeDisplay, #playTimeDisplay
+	font-size: 14px
+	span
+		font-weight: bold !important
+
+.range 
+	width: 100%
+	height: 10px
+	-webkit-appearance: none
+	background: #C4C9D9
+	outline: none
+	border-radius: 15px
+	overflow: hidden
+	pointer-events: none
+
+.range::-webkit-slider-thumb 
+	-webkit-appearance: none
+	width: 10px
+	height: 10px
+	border-radius: 50%
+	background: $color-count
+	box-shadow: -407px 0 0 400px $color-lightviolet
+
+// MODAL AUDIO
+
+.modal-audio
+	@media (max-width: 575.98px)
+		&.fade 
+			.modal-dialog
+				transform: translate(0, 100%) 
+		&.show 
+			.modal-dialog
+				transform: translate(0, 0)
+		.modal-dialog
+			margin: auto 0 0 0	
+			min-height: 100vh
+	.modal-content
+		padding: 30px
+		text-align: center
+		border: 0
+		@media (max-width: 575.98px)
+			border-radius: 8px 8px 0 0
+			margin-top: auto
+		.icon-box
+			display: flex 
+			position: relative
+			width: 200px
+			height: 200px
+			margin: 0 auto
+			margin-bottom: 40px
+			.icon-box-inside
+				margin: auto
+				width: 120px
+				height: 120px
+				line-height: 120px
+				background: rgba(242, 237, 255, 1)
+				border-radius: 100px
+				position: relative
+				z-index: 3
+				&:before, &:after 
+					content: "" 
+					position: absolute
+					border-radius: 100px
+					transition: $transition
+					top: 50%
+					left: 50%
+					transform: translate(-50%, -50%)
+				&:before 
+					width: 160px
+					height: 160px
+					background: rgba(242, 237, 255, 0.6)
+					z-index: -1
+					animation: color-point 5s infinite 
+				&:after 
+					width: 200px
+					height: 200px
+					background: rgba(242, 237, 255, 0.4)
+					z-index: 1
+					animation: color-point 5s infinite 
+
+@keyframes color-point
+	0%
+		opacity: 0
+	33%
+		opacity: 0.5
+	50%
+		opacity: 1
+	75%
+		opacity: 0.5
+	100%
+		opacity: 0
+

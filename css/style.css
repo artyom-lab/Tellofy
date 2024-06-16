@@ -50,6 +50,9 @@ a {
 .form-group {
   margin-bottom: 16px; }
 
+.fz-0 {
+  font-size: 0px !important; }
+
 .fz-14 {
   font-size: 14px !important; }
 
@@ -76,6 +79,10 @@ a {
       .h3 .number, h3 .number {
         left: 0;
         top: -30px; } }
+
+.h4, h4 {
+  font-size: 16px;
+  font-weight: bold; }
 
 .progress-line {
   background: #F2EDFF;
@@ -678,5 +685,137 @@ input::-webkit-inner-spin-button {
   display: none; }
 .step-9-active .steps .step-9 {
   display: flex; }
+
+.audio-recording {
+  background: #FFF;
+  border-radius: 8px;
+  padding: 8px 16px; }
+  .audio-recording .message {
+    text-align: center;
+    background: #F2EDFF;
+    border-radius: 100px;
+    font-size: 10px;
+    padding: 4px 16px;
+    margin-bottom: 12px; }
+  .audio-recording.orange .message {
+    background: #FFEBDC; }
+  .audio-recording.orange #recordTimeDisplay {
+    color: #FF6B00; }
+  .audio-recording.red .message {
+    background: #FFDCDC; }
+  .audio-recording.red #recordTimeDisplay {
+    color: #FF3E4A; }
+
+@media (min-width: 576px) {
+  .audiorecorder > [class*='col']:first-child {
+    border-right: 1px solid #E1E5F0; }
+  .audiorecorder > [class*='col']:last-child {
+    border-left: 1px solid #E1E5F0; } }
+
+.btn-delete svg path, .btn-transform svg path {
+  transition: 0.3s; }
+.btn-delete:hover, .btn-transform:hover {
+  opacity: 1; }
+  .btn-delete:hover svg path, .btn-transform:hover svg path {
+    fill: #6539D9; }
+
+.btn-record, .btn-play, .btn-transform, .btn-delete {
+  width: 20px;
+  height: 20px;
+  display: inline-block;
+  text-align: center;
+  line-height: 20px;
+  font-size: 0; }
+
+#waveform {
+  cursor: pointer; }
+
+#recordTimeDisplay, #playTimeDisplay {
+  font-size: 14px; }
+  #recordTimeDisplay span, #playTimeDisplay span {
+    font-weight: bold !important; }
+
+.range {
+  width: 100%;
+  height: 10px;
+  -webkit-appearance: none;
+  background: #C4C9D9;
+  outline: none;
+  border-radius: 15px;
+  overflow: hidden;
+  pointer-events: none; }
+
+.range::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: #4E5778;
+  box-shadow: -407px 0 0 400px #AF91FF; }
+
+@media (max-width: 575.98px) {
+  .modal-audio.fade .modal-dialog {
+    transform: translate(0, 100%); }
+  .modal-audio.show .modal-dialog {
+    transform: translate(0, 0); }
+  .modal-audio .modal-dialog {
+    margin: auto 0 0 0;
+    min-height: 100vh; } }
+.modal-audio .modal-content {
+  padding: 30px;
+  text-align: center;
+  border: 0; }
+  @media (max-width: 575.98px) {
+    .modal-audio .modal-content {
+      border-radius: 8px 8px 0 0;
+      margin-top: auto; } }
+  .modal-audio .modal-content .icon-box {
+    display: flex;
+    position: relative;
+    width: 200px;
+    height: 200px;
+    margin: 0 auto;
+    margin-bottom: 40px; }
+    .modal-audio .modal-content .icon-box .icon-box-inside {
+      margin: auto;
+      width: 120px;
+      height: 120px;
+      line-height: 120px;
+      background: #f2edff;
+      border-radius: 100px;
+      position: relative;
+      z-index: 3; }
+      .modal-audio .modal-content .icon-box .icon-box-inside:before, .modal-audio .modal-content .icon-box .icon-box-inside:after {
+        content: "";
+        position: absolute;
+        border-radius: 100px;
+        transition: 0.3s;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%); }
+      .modal-audio .modal-content .icon-box .icon-box-inside:before {
+        width: 160px;
+        height: 160px;
+        background: rgba(242, 237, 255, 0.6);
+        z-index: -1;
+        animation: color-point 5s infinite; }
+      .modal-audio .modal-content .icon-box .icon-box-inside:after {
+        width: 200px;
+        height: 200px;
+        background: rgba(242, 237, 255, 0.4);
+        z-index: 1;
+        animation: color-point 5s infinite; }
+
+@keyframes color-point {
+  0% {
+    opacity: 0; }
+  33% {
+    opacity: 0.5; }
+  50% {
+    opacity: 1; }
+  75% {
+    opacity: 0.5; }
+  100% {
+    opacity: 0; } }
 
 /*# sourceMappingURL=style.css.map */

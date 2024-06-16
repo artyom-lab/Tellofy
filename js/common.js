@@ -3,6 +3,9 @@ $(document).ready(function () {
 // TOOLTIP
 const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]')
 const tooltipList = [...tooltipTriggerList].map(tooltipTriggerEl => new bootstrap.Tooltip(tooltipTriggerEl))
+$('[data-bs-toggle="tooltip"]').on('click', function () {
+    $(this).tooltip('hide')
+});
 
 // COUNTERS
   $('#count-100').keyup(function() {  
@@ -19,6 +22,17 @@ const tooltipList = [...tooltipTriggerList].map(tooltipTriggerEl => new bootstra
     maximum = $('#maximum-1000'),
     theCount = $('#the-count-1000'); 
     current.text(characterCount);
+  });
+
+// AUDIO
+  $('.audio-to-text').click(function() {
+      $('.audio-buttons').addClass('d-none');
+      $('.audio-recording').removeClass('d-none');
+  });
+
+  $('.btn-delete').click(function() {
+      $('.audio-recording').addClass('d-none');
+      $('.audio-buttons').removeClass('d-none');
   });
 
 // ALL STEPS FUNCTIONALITY
@@ -42,6 +56,42 @@ for (let i = 1; i <= 7; i++) {
     event.preventDefault();
   });
 }
+
+// CALENDAR
+$(".datepicker").datepicker({
+  changeMonth: true,
+  changeYear: true,
+  dateFormat: "mm/dd/yy",
+
+  onSelect: function(dateText, inst) {
+    var $container = $(this).closest('.form-steps');
+    var selectedDate = $(this).datepicker("getDate");
+    $container.find(".btn-next, .arrow-next").prop("disabled", !selectedDate);
+    $container.find(".arrow-next").toggleClass("disabled", !selectedDate);
+  },
+  onClose: function(dateText, inst) {
+    var $container = $(this).closest('.form-steps');
+    var selectedDate = $(this).datepicker("getDate");
+    if (!selectedDate && !$(this).val().trim()) {
+      $container.find(".btn-next, .arrow-next").prop("disabled", true);
+      $container.find(".arrow-next").addClass("disabled");
+    }
+  }
+}).focus(function() {
+  var $container = $(this).closest('.form-steps');
+  $("#ui-datepicker-div").position({
+    my: "center top",
+    at: "center bottom",
+    of: $(this)
+  });
+}).keyup(function(event) {
+  if (event.keyCode == 8) {
+    var $container = $(this).closest('.form-steps');
+    $(this).val('');
+    $container.find(".btn-next, .arrow-next").prop("disabled", true);
+    $container.find(".arrow-next").addClass("disabled");
+  }
+});
 
 // STEP-1
 const form1 = document.getElementById('form1');
@@ -73,36 +123,6 @@ form3.addEventListener('change', function(event) {
   }
 });
 
-// STEP-4 / CALENDAR
-$(".datepicker").datepicker({
-  changeMonth: true,
-  changeYear: true,
-  dateFormat: "mm/dd/yy",
-  onSelect: function(dateText, inst) {
-    var selectedDate = $(this).datepicker("getDate");
-    $("#tostep-5, #tostep-5b").prop("disabled", !selectedDate);
-    $("#tostep-5b").toggleClass("disabled", !selectedDate);
-  },
-  onClose: function(dateText, inst) {
-    var selectedDate = $(this).datepicker("getDate");
-    if (!selectedDate && !$(this).val().trim()) {
-      $("#tostep-5, #tostep-5b").prop("disabled", true);
-      $("#tostep-5b").addClass("disabled");
-    }
-  }
-}).focus(function() {
-  $("#ui-datepicker-div").position({
-    my: "center top",
-    at: "center bottom",
-    of: $(this)
-  });
-}).keyup(function(event) {
-  if (event.keyCode == 8) {
-    $(this).val('');
-    $("#tostep-5, #tostep-5b").prop("disabled", true);
-    $("#tostep-5b").addClass("disabled");
-  }
-});
 
 // STEP-5
 const form5 = document.getElementById('form5');
