@@ -357,80 +357,74 @@ player.on('finishRecord', function() {
 window.player = player;
 
 // CONFETTI
+let oldVisibility;
 
-// const $activityStatusEl = document.getElementById("activityStatus");
-// let oldVisilbility;
+const getWindowSize = () => {
+  const width = window.innerWidth;
+  const height = window.innerHeight;
+  return { height, width };
+};
 
-// const getWindowSize = () => {
-//     const width = window.innerWidth;
-//     const height = window.innerHeight;
+const placeConfetti = (x, y, angle = 90, particleCount = 100) => {
+  const { height, width } = getWindowSize();
+  const origin = { x: x / width, y: y / height };
+  confetti({ origin, angle, particleCount, spread: 360 });
+};
 
-//   return {height, width};
-// }
+const checkVisibilityState = async () => {
+  const isActive = document.visibilityState === "visible";
 
-// const placeConfetti = (x, y, angle = 90, particleCount = 100) => {
-//   const { height, width } = getWindowSize();
-//   console.log(height, width);
-//   const origin = { x: x / width, y: y / height };
-//   confetti({ origin, angle, particleCount, spread: 360 });
-// };
+  if (!oldVisibility) await new Promise((resolve) => setTimeout(resolve, 5000));
 
-// const checkVisiblityState = async () => {
-//   const isActive = document.visibilityState === "visible";
+  if (!isActive) {
+    // inactive - reset confetti (optional but looks nicer)
+    confetti.reset();
+  }
 
-//   if (!oldVisilbility) await new Promise((x) => setTimeout(x, 5000));
+  oldVisibility = isActive;
+};
 
-//   $activityStatusEl.textContent = isActive ? "active" : "inactive";
+const startConfettiAnimation = () => {
+  var duration = 30 * 1000;
+  var end = Date.now() + duration;
 
-//   document.getElementsByClassName("info")[0].style.display = !isActive
-//     ? "block"
-//     : "none";
+  (function frame() {
+    // launch a few confetti from the left edge
+    confetti({
+      particleCount: 7,
+      angle: 60,
+      spread: 55,
+      origin: { x: 0 }
+    });
+    // and launch a few from the right edge
+    confetti({
+      particleCount: 7,
+      angle: 120,
+      spread: 55,
+      origin: { x: 1 }
+    });
 
-//   if (!isActive) {
-//     // inactive - reset confetti (optional but looks nicer)
-//     confetti.reset();
-//   }
+    // keep going until we are out of time
+    if (Date.now() < end) {
+      requestAnimationFrame(frame);
+    }
+  })();
+};
 
-//   oldVisilbility = isActive;
-//   running = isActive;
-// };
+const handleClick = (event) => {
+  const id = event.target.id;
+  if (id === "tostep-9b" || id === "tostep-9") {
+    const { clientX, clientY } = event;
+    placeConfetti(clientX, clientY);
+    startConfettiAnimation();
+  }
+};
 
-// document.addEventListener("visibilitychange", (event) => {
-//   checkVisiblityState();
-// });
+document.addEventListener("visibilitychange", checkVisibilityState);
 
-// document.addEventListener("click", ({ clientX, clientY }) => {
-//   console.log(clientX, clientY);
-//   placeConfetti(clientX, clientY);
-// });
+document.getElementById("tostep-9b").addEventListener("click", handleClick);
+document.getElementById("tostep-9").addEventListener("click", handleClick);
 
-// // do this for 30 seconds
-// var duration = 30 * 1000;
-// var end = Date.now() + duration;
-
-// (function frame() {
-//   // launch a few confetti from the left edge
-//   confetti({
-//     particleCount: 7,
-//     angle: 60,
-//     spread: 55,
-//     origin: { x: 0 }
-//   });
-//   // and launch a few from the right edge
-//   confetti({
-//     particleCount: 7,
-//     angle: 120,
-//     spread: 55,
-//     origin: { x: 1 }
-//   });
-
-//   // keep going until we are out of time
-//   if (Date.now() < end) {
-//     requestAnimationFrame(frame);
-//   }
-// })();
-
-// checkVisiblityState();
-
+checkVisibilityState();
 
 });
