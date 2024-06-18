@@ -98,7 +98,11 @@ a
 .progress-line
 	background: $color-body
 	height: 4px
-	position: relative
+	position: fixed
+	top: 0
+	left: 0
+	right: 0
+	z-index: 1030
 	transition: $transition
 	&:before 
 		content: ""
@@ -115,7 +119,7 @@ a
 	padding: 16px 0
 	margin-bottom: 24px
 	position: fixed
-	top: 0
+	top: 4px
 	left: 0
 	right: 0
 	background: $color-body
@@ -222,7 +226,7 @@ a
 	text-align: center
 	background: $color-body
 	z-index: 1030
-	@media (max-width: 575.98px)
+	@media (max-width: 991.98px)
 		padding: 20px 0
 
 .pagination-box
