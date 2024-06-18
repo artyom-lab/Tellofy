@@ -10,6 +10,7 @@ $color-lightviolet: #AF91FF
 $color-dark: #1D253F
 $color-count: #4E5778
 $color-placeholder: #838BAD
+$color-border: #C4C9D9
 
 
 *
@@ -301,7 +302,7 @@ a
 
 .the-count-1000
 	position: absolute
-	color: #C4C9D9
+	color: $color-border
 	bottom: 12px
 	right: 16px
 	display: inline-block
@@ -450,19 +451,19 @@ input[type=number]
 	z-index: 2
 	@media (max-width: 767.98px)
 		text-align: center
-	@media (max-width: 575.98px)
-		&:before
-			content: ""
-			position: absolute
-			z-index: 1
-			top: 0
-			left: -20px
-			right: -20px
-			bottom: 0
-			background-size: cover 
-			background-position: center center
-			background-repeat: no-repeat
-			background-image: url(../img/bg-feedback.png)
+	// @media (max-width: 575.98px)
+	// 	&:before
+	// 		content: ""
+	// 		position: absolute
+	// 		z-index: 1
+	// 		top: 0
+	// 		left: -20px
+	// 		right: -20px
+	// 		bottom: 0
+	// 		background-size: cover 
+	// 		background-position: center center
+	// 		background-repeat: no-repeat
+	// 		background-image: url(../img/bg-feedback.png)
 
 
 // CALENDAR
@@ -652,8 +653,8 @@ input[type=number]
 
 // STEPS 
 
-.step-2, .step-3, .step-4, .step-5, .step-6, .step-7, .step-8, .step-9
-	display: none
+// .step-2, .step-3, .step-4, .step-5, .step-6, .step-7, .step-8, .step-9
+// 	display: none
 
 @for $i from 2 through 9
 	.step-#{$i}-active
@@ -726,7 +727,7 @@ input[type=number]
 	width: 100%
 	height: 10px
 	-webkit-appearance: none
-	background: #C4C9D9
+	background: $color-border
 	outline: none
 	border-radius: 15px
 	overflow: hidden
@@ -737,8 +738,8 @@ input[type=number]
 	width: 10px
 	height: 10px
 	border-radius: 50%
-	background: $color-count
-	box-shadow: -407px 0 0 400px $color-lightviolet
+	background: $color-body
+	box-shadow: -407px 0 0 400px $color-violet2
 
 // MODAL AUDIO
 
@@ -808,4 +809,65 @@ input[type=number]
 		opacity: 0.5
 	100%
 		opacity: 0
+    
+// VIDEO RECORDING
 
+.video-recording
+	position: relative
+	.video-js
+		background: $color-body
+		border-radius: 8px
+		border: 1px solid $color-border
+		overflow: hidden
+		.vjs-device-button
+			background-color: transparent 
+			background-image: url(../img/camera.svg)
+			background-position: center center
+			background-repeat: no-repeat
+			background-size: cover
+			width: 48px
+			height: 48px
+			margin: 0
+			transform: translate(-50%, -50%)
+			&:before 
+				display: none
+			&:hover 
+				opacity: 0.8
+		.vjs-control-bar
+			color: $color-lightviolet
+			height: auto
+			background: $color-white
+			@media (min-width: 576px)
+				padding: 16px 
+				font-size: 12px
+			button 
+				transition: $transition
+				&:hover 
+					color: $color-violet2
+			.vjs-volume-panel
+				.vjs-volume-control
+					.vjs-volume-level
+						background: $color-violet2
+			.vjs-current-time, .vjs-time-divider, .vjs-duration
+				padding-left: 2px
+				padding-right: 2px
+				min-width: auto
+			.vjs-play-progress
+				background: $color-violet2
+
+.video-delete
+	position: absolute
+	top: 12px
+	left: 12px
+	background: $color-white 
+	border-radius: 100px
+	width: 32px
+	height: 32px
+	border: 1px solid $color-border
+	text-align: center 
+	line-height: 26px
+	svg path 
+		transition: $transition
+	&:hover
+		svg path 
+			fill: $color-violet2

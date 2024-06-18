@@ -35,6 +35,17 @@ $('[data-bs-toggle="tooltip"]').on('click', function () {
       $('.audio-buttons').removeClass('d-none');
   });
 
+// VIDEO
+  $('.video-to-text').click(function() {
+      $('.textarea-box').addClass('d-none');
+      $('.video-recording').removeClass('d-none');
+  });
+
+  $('.video-delete').click(function() {
+      $('.video-recording').addClass('d-none');
+      $('.textarea-box').removeClass('d-none');
+  });
+
 // ALL STEPS FUNCTIONALITY
 function scrollToTop() {
   $('html, body').animate({ scrollTop: 0 });
@@ -293,5 +304,133 @@ function updateButtonState() {
   $('form').submit(function(e) {
     e.preventDefault();
   });
+
+// VIDEO
+var player = videojs('myVideo', {
+    controls: true,
+    loop: true,
+    width: 320,
+    height: 344,
+    fluid: true,
+    plugins: {
+      record: {
+        controls: true,
+        maxLength: 120,
+        debug: true,
+        audio: true,
+        video: true
+      }
+    }
+}, function(){
+    // print version information at startup
+    videojs.log('Using video.js', videojs.VERSION,
+        'with videojs-record', videojs.getPluginVersion('record'),
+        'and recordrtc', RecordRTC.version);
+});
+
+// error handling
+player.on('deviceError', function() {
+    console.log('device error:', player.deviceErrorCode);
+});
+player.on('error', function(error) {
+    console.log('error:', error);
+});
+
+// When recording finishes, remove the disabled class from element with id 'tostep-4b'
+player.on('finishRecord', function() {
+    console.log('Recording finished!');
+
+    var element1 = document.getElementById('tostep-3');
+    var element2 = document.getElementById('tostep-4b');
+
+    if (element1) {
+        console.log('Removing disabled attribute from element with id "tostep-3"');
+        element1.removeAttribute('disabled');
+    }
+    if (element2) {
+        console.log('Removing disabled class from element with id "tostep-4b"');
+        element2.classList.remove('disabled');
+    }
+});
+
+// Assigning the player object to the global window object for debugging purposes
+window.player = player;
+
+// CONFETTI
+
+const $activityStatusEl = document.getElementById("activityStatus");
+let oldVisilbility;
+
+const getWindowSize = () => {
+    const width = window.innerWidth;
+    const height = window.innerHeight;
+
+  return {height, width};
+}
+
+const placeConfetti = (x, y, angle = 90, particleCount = 100) => {
+  const { height, width } = getWindowSize();
+  console.log(height, width);
+  const origin = { x: x / width, y: y / height };
+  confetti({ origin, angle, particleCount, spread: 360 });
+};
+
+const checkVisiblityState = async () => {
+  const isActive = document.visibilityState === "visible";
+
+  if (!oldVisilbility) await new Promise((x) => setTimeout(x, 5000));
+
+  $activityStatusEl.textContent = isActive ? "active" : "inactive";
+
+  document.getElementsByClassName("info")[0].style.display = !isActive
+    ? "block"
+    : "none";
+
+  if (!isActive) {
+    // inactive - reset confetti (optional but looks nicer)
+    confetti.reset();
+  }
+
+  oldVisilbility = isActive;
+  running = isActive;
+};
+
+document.addEventListener("visibilitychange", (event) => {
+  checkVisiblityState();
+});
+
+document.addEventListener("click", ({ clientX, clientY }) => {
+  console.log(clientX, clientY);
+  placeConfetti(clientX, clientY);
+});
+
+// do this for 30 seconds
+var duration = 30 * 1000;
+var end = Date.now() + duration;
+
+(function frame() {
+  // launch a few confetti from the left edge
+  confetti({
+    particleCount: 7,
+    angle: 60,
+    spread: 55,
+    origin: { x: 0 }
+  });
+  // and launch a few from the right edge
+  confetti({
+    particleCount: 7,
+    angle: 120,
+    spread: 55,
+    origin: { x: 1 }
+  });
+
+  // keep going until we are out of time
+  if (Date.now() < end) {
+    requestAnimationFrame(frame);
+  }
+})();
+
+checkVisiblityState();
+
 
 });

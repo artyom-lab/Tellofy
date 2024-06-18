@@ -436,19 +436,6 @@ input::-webkit-inner-spin-button {
   @media (max-width: 767.98px) {
     .feedback-box {
       text-align: center; } }
-  @media (max-width: 575.98px) {
-    .feedback-box:before {
-      content: "";
-      position: absolute;
-      z-index: 1;
-      top: 0;
-      left: -20px;
-      right: -20px;
-      bottom: 0;
-      background-size: cover;
-      background-position: center center;
-      background-repeat: no-repeat;
-      background-image: url(../img/bg-feedback.png); } }
 
 .ui-widget {
   font-family: inherit; }
@@ -627,9 +614,6 @@ input::-webkit-inner-spin-button {
       .select2-container--open .select2-dropdown .select2-results .select2-results__options .select2-results__option--highlighted.select2-results__option--selectable:hover, .select2-container--open .select2-dropdown .select2-results .select2-results__options .select2-results__option--highlighted.select2-results__option--selectable.select2-results__option--selected, .select2-container--open .select2-dropdown .select2-results .select2-results__options .select2-results__option--highlighted.select2-results__option--selectable.select2-results__option--highlighted.select2-results__option--selectable {
         background-color: #F2EDFF; }
 
-.step-2, .step-3, .step-4, .step-5, .step-6, .step-7, .step-8, .step-9 {
-  display: none; }
-
 .step-2-active .progress-line:before {
   width: 22.2222222222%; }
 .step-2-active .steps .step-1 {
@@ -750,8 +734,8 @@ input::-webkit-inner-spin-button {
   width: 10px;
   height: 10px;
   border-radius: 50%;
-  background: #4E5778;
-  box-shadow: -407px 0 0 400px #AF91FF; }
+  background: #F2EDFF;
+  box-shadow: -407px 0 0 400px #440FCF; }
 
 @media (max-width: 575.98px) {
   .modal-audio.fade .modal-dialog {
@@ -817,5 +801,62 @@ input::-webkit-inner-spin-button {
     opacity: 0.5; }
   100% {
     opacity: 0; } }
+.video-recording {
+  position: relative; }
+  .video-recording .video-js {
+    background: #F2EDFF;
+    border-radius: 8px;
+    border: 1px solid #C4C9D9;
+    overflow: hidden; }
+    .video-recording .video-js .vjs-device-button {
+      background-color: transparent;
+      background-image: url(../img/camera.svg);
+      background-position: center center;
+      background-repeat: no-repeat;
+      background-size: cover;
+      width: 48px;
+      height: 48px;
+      margin: 0;
+      transform: translate(-50%, -50%); }
+      .video-recording .video-js .vjs-device-button:before {
+        display: none; }
+      .video-recording .video-js .vjs-device-button:hover {
+        opacity: 0.8; }
+    .video-recording .video-js .vjs-control-bar {
+      color: #AF91FF;
+      height: auto;
+      background: #FFF; }
+      @media (min-width: 576px) {
+        .video-recording .video-js .vjs-control-bar {
+          padding: 16px;
+          font-size: 12px; } }
+      .video-recording .video-js .vjs-control-bar button {
+        transition: 0.3s; }
+        .video-recording .video-js .vjs-control-bar button:hover {
+          color: #440FCF; }
+      .video-recording .video-js .vjs-control-bar .vjs-volume-panel .vjs-volume-control .vjs-volume-level {
+        background: #440FCF; }
+      .video-recording .video-js .vjs-control-bar .vjs-current-time, .video-recording .video-js .vjs-control-bar .vjs-time-divider, .video-recording .video-js .vjs-control-bar .vjs-duration {
+        padding-left: 2px;
+        padding-right: 2px;
+        min-width: auto; }
+      .video-recording .video-js .vjs-control-bar .vjs-play-progress {
+        background: #440FCF; }
+
+.video-delete {
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  background: #FFF;
+  border-radius: 100px;
+  width: 32px;
+  height: 32px;
+  border: 1px solid #C4C9D9;
+  text-align: center;
+  line-height: 26px; }
+  .video-delete svg path {
+    transition: 0.3s; }
+  .video-delete:hover svg path {
+    fill: #440FCF; }
 
 /*# sourceMappingURL=style.css.map */
