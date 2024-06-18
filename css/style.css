@@ -9,10 +9,7 @@ img {
 body {
   font-family: "Inter", sans-serif;
   background-color: #F2EDFF;
-  color: #1D253F;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column; }
+  color: #1D253F; }
 
 a {
   text-decoration: none !important;
