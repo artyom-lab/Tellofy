@@ -10,6 +10,11 @@ body {
   font-family: "Inter", sans-serif;
   background-color: #F2EDFF;
   color: #1D253F; }
+  @media (min-width: 576px) {
+    body {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column; } }
 
 a {
   text-decoration: none !important;
@@ -127,6 +132,9 @@ a {
 .main-section {
   display: flex;
   flex-direction: column; }
+  @media (min-width: 576px) {
+    .main-section {
+      flex-grow: 1; } }
 
 .steps {
   display: flex;
