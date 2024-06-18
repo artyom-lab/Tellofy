@@ -102,7 +102,13 @@ a {
 
 .header {
   padding: 16px 0;
-  margin-bottom: 24px; }
+  margin-bottom: 24px;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  background: #F2EDFF;
+  z-index: 1030; }
   .header .logo img {
     width: 75px; }
     @media (max-width: 575.98px) {
@@ -133,6 +139,7 @@ a {
 
 .main-content {
   margin-bottom: 60px;
+  padding: 90px 0 140px;
   margin-top: auto;
   margin-bottom: auto; }
 
@@ -196,9 +203,15 @@ a {
     right: 0; }
 
 .footer {
-  margin-top: auto;
-  padding: 48px 0;
-  text-align: center; }
+  margin-top: 24px;
+  position: fixed;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  padding: 20px 0 48px;
+  text-align: center;
+  background: #F2EDFF;
+  z-index: 1030; }
   @media (max-width: 575.98px) {
     .footer {
       padding: 20px 0; } }
