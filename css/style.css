@@ -142,10 +142,12 @@ a {
     flex-grow: 1; }
 
 .main-content {
-  margin-bottom: 60px;
-  padding: 70px 0 110px;
-  margin-top: auto;
-  margin-bottom: auto; }
+  padding: 120px 0 48px; }
+  @media (min-width: 576px) {
+    .main-content {
+      padding: 90px 0 140px;
+      margin-top: auto;
+      margin-bottom: auto; } }
 
 .likely-box {
   display: flex;

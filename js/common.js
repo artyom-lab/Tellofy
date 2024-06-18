@@ -47,13 +47,13 @@ $('[data-bs-toggle="tooltip"]').on('click', function () {
   });
 
 // ALL STEPS FUNCTIONALITY
-// function scrollToTop() {
-//   $('html, body').animate({ scrollTop: 0 });
-// }
+function scrollToTop() {
+  $('html, body').animate({ scrollTop: 0 });
+}
 
 function setActiveStep(step) {
   $("body").addClass("step-" + step + "-active");
-  // scrollToTop();
+  scrollToTop();
 }
 
 for (let i = 2; i <= 9; i++) {
@@ -63,7 +63,7 @@ for (let i = 2; i <= 9; i++) {
 for (let i = 1; i <= 7; i++) {
   $(`#backstep-${i}, #backstep-${i}b`).on("click", event => {
     $("body").removeClass(`step-${i + 1}-active`);
-    // scrollToTop();
+    scrollToTop();
     event.preventDefault();
   });
 }
