@@ -222,8 +222,7 @@ a {
   left: 0;
   padding: 20px 0 48px;
   text-align: center;
-  background: #F2EDFF;
-  z-index: 1030; }
+  background: #F2EDFF; }
   @media (max-width: 991.98px) {
     .footer {
       padding: 20px 0; } }
@@ -241,6 +240,9 @@ a {
       height: 24px;
       text-align: center;
       padding: 4px;
+      background: #FFF;
+      border: 0;
+      transition: 0.3s;
       line-height: 16px; }
       .pagination-box .arrows-box .arrow:hover {
         background: #440FCF;

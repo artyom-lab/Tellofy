@@ -1,6 +1,7 @@
 $(document).ready(function () {
 
 // TOOLTIP
+
 const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]')
 const tooltipList = [...tooltipTriggerList].map(tooltipTriggerEl => new bootstrap.Tooltip(tooltipTriggerEl))
 $('[data-bs-toggle="tooltip"]').on('click', function () {
@@ -8,6 +9,7 @@ $('[data-bs-toggle="tooltip"]').on('click', function () {
 });
 
 // COUNTERS
+
   $('#count-100').keyup(function() {  
     var characterCount = $(this).val().length,
     current = $('#current-100'),
@@ -25,11 +27,11 @@ $('[data-bs-toggle="tooltip"]').on('click', function () {
   });
 
 // AUDIO
+
   $('.audio-to-text').click(function() {
       $('.audio-buttons').addClass('d-none');
       $('.audio-recording').removeClass('d-none');
   });
-
   $('.btn-delete').click(function() {
       $('.audio-recording').addClass('d-none');
       $('.audio-buttons').removeClass('d-none');
@@ -40,13 +42,13 @@ $('[data-bs-toggle="tooltip"]').on('click', function () {
       $('.textarea-box').addClass('d-none');
       $('.video-recording').removeClass('d-none');
   });
-
   $('.video-delete').click(function() {
       $('.video-recording').addClass('d-none');
       $('.textarea-box').removeClass('d-none');
   });
 
 // ALL STEPS FUNCTIONALITY
+
 function scrollToTop() {
   $('html, body').animate({ scrollTop: 0 });
 }
@@ -56,8 +58,16 @@ function setActiveStep(step) {
   scrollToTop();
 }
 
+// for (let i = 2; i <= 9; i++) {
+//   $(`#tostep-${i}, #tostep-${i}b`).on("click", () => setActiveStep(i));
+// }
+
 for (let i = 2; i <= 9; i++) {
-  $(`#tostep-${i}, #tostep-${i}b`).on("click", () => setActiveStep(i));
+  $(`#tostep-${i}, #tostep-${i}b`).on("click", function() {
+    if (!$(this).closest('#form7, #form8').length) {
+      setActiveStep(i);
+    }
+  });
 }
 
 for (let i = 1; i <= 7; i++) {
@@ -69,38 +79,43 @@ for (let i = 1; i <= 7; i++) {
 }
 
 // CALENDAR
+
 $(".datepicker").datepicker({
   changeMonth: true,
   changeYear: true,
   dateFormat: "mm/dd/yy",
 
   onSelect: function(dateText, inst) {
-    var $container = $(this).closest('.form-steps');
     var selectedDate = $(this).datepicker("getDate");
-    $container.find(".btn-next, .arrow-next").prop("disabled", !selectedDate);
-    $container.find(".arrow-next").toggleClass("disabled", !selectedDate);
+    if (selectedDate) {
+      $(".btn-next").prop("disabled", false);
+      $("#tostep-5b").removeClass("disabled");
+    } else {
+      $(".btn-next").prop("disabled", true); 
+      $("#tostep-5b").addClass("disabled"); 
+    }
   },
   onClose: function(dateText, inst) {
-    var $container = $(this).closest('.form-steps');
     var selectedDate = $(this).datepicker("getDate");
     if (!selectedDate && !$(this).val().trim()) {
-      $container.find(".btn-next, .arrow-next").prop("disabled", true);
-      $container.find(".arrow-next").addClass("disabled");
+      $(".btn-next").prop("disabled", true); 
+      $("#tostep-5b").addClass("disabled"); 
+    } else {
+      $(".btn-next").prop("disabled", false); 
+      $("#tostep-5b").removeClass("disabled");
     }
   }
 }).focus(function() {
-  var $container = $(this).closest('.form-steps');
   $("#ui-datepicker-div").position({
     my: "center top",
     at: "center bottom",
     of: $(this)
   });
 }).keyup(function(event) {
-  if (event.keyCode == 8) {
-    var $container = $(this).closest('.form-steps');
+  if (event.keyCode == 8) { 
     $(this).val('');
-    $container.find(".btn-next, .arrow-next").prop("disabled", true);
-    $container.find(".arrow-next").addClass("disabled");
+    $(".btn-next").prop("disabled", true); 
+    $("#tostep-5b").addClass("disabled");
   }
 });
 
@@ -162,6 +177,7 @@ selectInputs.on('select2:select select2:unselect', checkSelects);
 checkSelects();
 
 // STEP-7
+
 const form7 = document.getElementById('form7');
 const btn7 = document.getElementById('tostep-8');
 const arrow7 = document.getElementById('tostep-8b');
@@ -180,6 +196,7 @@ input1.forEach(input => {
 });
 
 // STEP-8
+
 const form8 = $('#form8');
 const btn8 = $('#tostep-9');
 const arrow8 = $('#tostep-9b');
@@ -195,6 +212,7 @@ function updateButtonState() {
   checkbox.on("change", updateButtonState);
 
  // SELECT2
+
 (function($) {
   var Defaults = $.fn.select2.amd.require('select2/defaults');
   $.extend(Defaults.defaults, {
@@ -269,43 +287,74 @@ function updateButtonState() {
     });
 
 // VALIDATE
-  // $('#form1').validate({
-  //   rules: {
-  //     name: {
-  //       required: true,
-  //     },
-  //     code: {
-  //       required: true,
-  //       minlength: 11,
-  //       maxlength: 11,
-  //     },
-  //     firstname: {
-  //       required: true,
-  //       minlength: 2
-  //     },
-  //     secondname: {
-  //       required: true,
-  //       minlength: 2
-  //     },
-  //     thirdname: {
-  //       required: true,
-  //       minlength: 2
-  //     },
-  //   },
 
-  //   submitHandler: function(form) {
-  //     $(form).submit(function(e) {
-  //       e.preventDefault();
-  //     });
-  //   }
+  $('#form7').validate({
+    rules: {
+      input1: {
+        required: true,
+        minlength: 10,
+      },
+    },
+    messages: {
+      input1: {
+        required: "Error message here",
+      },
+    },
+    submitHandler: function(form) {
+      $("body").addClass("step-8-active");
+    }
+  });
 
-  // });
+  $('#form8').validate({
+    rules: {
+      fullname: {
+        required: true,
+        minlength: 5,
+      },
+      email: {
+        required: true,
+        minlength: 8,
+      },
+      phone: {
+        required: true,
+        minlength: 10,
+      },
+    },
+    messages: {
+      fullname: {
+        required: "Error message here",
+      },
+      email: {
+        required: "This email doesn’t seem right.",
+      },
+      phone: {
+        required: "This number doesn’t seem right.",
+      },
+    },
+    submitHandler: function(form) {
+      $("body").addClass("step-9-active");
+    }
+  });
 
   $('form').submit(function(e) {
     e.preventDefault();
   });
 
+// PHONE
+
+  function formatPhoneNumber() {
+    let input = document.getElementById('phone');
+    let value = input.value.replace(/\D/g, ''); 
+
+    let formattedValue = '+' + value.slice(0, 1) + ' ' + value.slice(1, 4) + ' ' + value.slice(4, 7) + ' ' + value.slice(7);
+
+    input.value = formattedValue;
+  }
+
+  document.getElementById('phone').addEventListener('input', formatPhoneNumber);
+
 // VIDEO
+
 var player = videojs('myVideo', {
     controls: true,
     loop: true,
@@ -341,90 +390,109 @@ player.on('finishRecord', function() {
     console.log('Recording finished!');
 
     var element1 = document.getElementById('tostep-3');
-    var element2 = document.getElementById('tostep-4b');
+    var element2 = document.getElementById('tostep-3b');
 
     if (element1) {
         console.log('Removing disabled attribute from element with id "tostep-3"');
         element1.removeAttribute('disabled');
     }
     if (element2) {
-        console.log('Removing disabled class from element with id "tostep-4b"');
+        console.log('Removing disabled class from element with id "tostep-3b"');
         element2.classList.remove('disabled');
     }
 });
-
 // Assigning the player object to the global window object for debugging purposes
 window.player = player;
 
 // CONFETTI
+
 let oldVisibility;
+let confettiActive = false;
 
 const getWindowSize = () => {
-  const width = window.innerWidth;
-  const height = window.innerHeight;
-  return { height, width };
+    const width = window.innerWidth;
+    const height = window.innerHeight;
+    return { height, width };
 };
 
 const placeConfetti = (x, y, angle = 90, particleCount = 100) => {
-  const { height, width } = getWindowSize();
-  const origin = { x: x / width, y: y / height };
-  confetti({ origin, angle, particleCount, spread: 360 });
+    const { height, width } = getWindowSize();
+    const origin = { x: x / width, y: y / height };
+    confetti({ origin, angle, particleCount, spread: 360 });
 };
 
 const checkVisibilityState = async () => {
-  const isActive = document.visibilityState === "visible";
+    const isActive = document.visibilityState === "visible";
 
-  if (!oldVisibility) await new Promise((resolve) => setTimeout(resolve, 5000));
+    if (!oldVisibility) await new Promise((resolve) => setTimeout(resolve, 5000));
 
-  if (!isActive) {
-    // inactive - reset confetti (optional but looks nicer)
-    confetti.reset();
-  }
+    console.log(isActive ? "active" : "inactive");
 
-  oldVisibility = isActive;
-};
-
-const startConfettiAnimation = () => {
-  var duration = 30 * 1000;
-  var end = Date.now() + duration;
-
-  (function frame() {
-    // launch a few confetti from the left edge
-    confetti({
-      particleCount: 7,
-      angle: 60,
-      spread: 55,
-      origin: { x: 0 }
-    });
-    // and launch a few from the right edge
-    confetti({
-      particleCount: 7,
-      angle: 120,
-      spread: 55,
-      origin: { x: 1 }
-    });
-
-    // keep going until we are out of time
-    if (Date.now() < end) {
-      requestAnimationFrame(frame);
+    if (!isActive) {
+        // Optional: Reset confetti when inactive
+        confetti.reset();
+        confettiActive = false;
     }
-  })();
+
+    oldVisibility = isActive;
 };
 
-const handleClick = (event) => {
-  const id = event.target.id;
-  if (id === "tostep-9b" || id === "tostep-9") {
-    const { clientX, clientY } = event;
-    placeConfetti(clientX, clientY);
-    startConfettiAnimation();
-  }
+// Function to start long-duration confetti animation
+const startConfettiAnimation = () => {
+    if (confettiActive) return;
+    
+    confettiActive = true;
+    const duration = 30 * 1000; // 30 seconds
+    const end = Date.now() + duration;
+
+    (function frame() {
+        // launch a few confetti from the left edge
+        confetti({
+            particleCount: 7,
+            angle: 60,
+            spread: 55,
+            origin: { x: 0 }
+        });
+        // and launch a few from the right edge
+        confetti({
+            particleCount: 7,
+            angle: 120,
+            spread: 55,
+            origin: { x: 1 }
+        });
+
+        // keep going until we are out of time
+        if (Date.now() < end && confettiActive) {
+            requestAnimationFrame(frame);
+        }
+    })();
 };
 
-document.addEventListener("visibilitychange", checkVisibilityState);
+// Function to check for 'step-9-active' class on body
+const checkStep9ActiveClass = () => {
+    const body = document.body;
+    if (body.classList.contains("step-9-active")) {
+        startConfettiAnimation();
+        checkVisibilityState();
+    } else {
+        confetti.reset();
+        confettiActive = false;
+    }
+};
 
-document.getElementById("tostep-9b").addEventListener("click", handleClick);
-document.getElementById("tostep-9").addEventListener("click", handleClick);
+// Check for 'step-9-active' class initially
+checkStep9ActiveClass();
 
-checkVisibilityState();
+// Observe changes to the body's class attribute
+const bodyObserver = new MutationObserver((mutationsList) => {
+    for (let mutation of mutationsList) {
+        if (mutation.type === 'attributes' && mutation.attributeName === 'class') {
+            checkStep9ActiveClass();
+            break;
+        }
+    }
+});
+
+bodyObserver.observe(document.body, { attributes: true });
 
 });
