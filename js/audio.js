@@ -48,6 +48,14 @@ document.addEventListener('DOMContentLoaded', function() {
     // Calculate position slider value based on recording duration
     const sliderValue = (recordingDuration / 120) * 100; // 120 seconds = 100% of the slider range
     positionSlider.value = Math.round(sliderValue); // Ensure slider value does not exceed 100%
+
+    // Add classes based on recording duration
+    if (recordingDuration >= 100 && recordingDuration < 110) {
+      document.querySelector('.audio-recording').classList.add('orange');
+    } else if (recordingDuration >= 110) {
+      document.querySelector('.audio-recording').classList.remove('orange');
+      document.querySelector('.audio-recording').classList.add('red');
+    }
   }
 
   // Update play time display
@@ -129,11 +137,12 @@ document.addEventListener('DOMContentLoaded', function() {
         positionSlider.style.display = 'none';
         positionSlider.value = 0;
 
-        document.querySelector('.audio-recording').classList.remove('red', 'orange');
+        // Reset classes after recording is finished
+        document.querySelector('.audio-recording').classList.remove('orange', 'red');
       };
 
       mediaRecorder.start();
-      recordBtn.innerHTML = '<img src="img/pause-red.svg" alt="">';
+      recordBtn.innerHTML = '<img src="img/stop-red.svg" alt="">';
       isRecording = true;
 
     } catch (err) {
