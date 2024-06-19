@@ -25,9 +25,10 @@ body
 	font-family: 'Inter', sans-serif
 	background-color: $color-body
 	color: $color-dark
-	min-height: 100vh
-	display: flex 
-	flex-direction: column
+	@media (min-width: 576px)
+		min-height: 100vh
+		display: flex 
+		flex-direction: column
 
 a 
 	text-decoration: none !important
@@ -142,6 +143,8 @@ a
 	display: flex 
 	flex-direction: column
 	flex-grow: 1
+	position: relative
+	z-index: 2
 
 .steps
 	display: flex 

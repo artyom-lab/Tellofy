@@ -9,10 +9,12 @@ img {
 body {
   font-family: "Inter", sans-serif;
   background-color: #F2EDFF;
-  color: #1D253F;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column; }
+  color: #1D253F; }
+  @media (min-width: 576px) {
+    body {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column; } }
 
 a {
   text-decoration: none !important;
@@ -130,7 +132,9 @@ a {
 .main-section {
   display: flex;
   flex-direction: column;
-  flex-grow: 1; }
+  flex-grow: 1;
+  position: relative;
+  z-index: 2; }
 
 .steps {
   display: flex;
