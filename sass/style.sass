@@ -11,6 +11,7 @@ $color-dark: #1D253F
 $color-count: #4E5778
 $color-placeholder: #838BAD
 $color-border: #C4C9D9
+$color-red: #FF3E4A
 
 
 *
@@ -337,6 +338,9 @@ a
 	color: $color-count
 	font-size: 12px
 	text-align: right
+	position: absolute
+	right: 0
+	top: 44px
 
 .audio-buttons
 	background: $color-white
@@ -430,6 +434,8 @@ input[type="checkbox"]
 	&:focus
 		box-shadow: none
 		border-color: $color-placeholder
+	&.error
+		border-color: $color-red
 
 .label
 	font-size: 12px
@@ -699,7 +705,7 @@ input[type=number]
 		.message
 			background: #FFDCDC
 		#recordTimeDisplay
-			color: #FF3E4A
+			color: $color-red
 
 .audiorecorder
 	> [class*='col']
@@ -882,3 +888,22 @@ input[type=number]
 		svg path 
 			fill: $color-violet2
 
+// VALIDATION
+
+label
+	&.error
+		color: $color-red
+		font-size: 12px
+		padding-left: 20px
+		padding-right: 40px
+		position: relative
+		&:before 
+			content: ''
+			position: absolute 
+			left: 0
+			top: 0
+			width: 16px
+			height: 16px
+			background-image: url(../img/validation.svg)
+			background-position: center center
+			background-repeat: no-repeat

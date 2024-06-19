@@ -332,7 +332,10 @@ a {
 .the-count-100 {
   color: #4E5778;
   font-size: 12px;
-  text-align: right; }
+  text-align: right;
+  position: absolute;
+  right: 0;
+  top: 44px; }
 
 .audio-buttons {
   background: #FFF;
@@ -419,6 +422,8 @@ input[type="checkbox"]:checked ~ .f:before {
   .input-text:focus {
     box-shadow: none;
     border-color: #838BAD; }
+  .input-text.error {
+    border-color: #FF3E4A; }
 
 .label {
   font-size: 12px;
@@ -888,5 +893,22 @@ input::-webkit-inner-spin-button {
     transition: 0.3s; }
   .video-delete:hover svg path {
     fill: #440FCF; }
+
+label.error {
+  color: #FF3E4A;
+  font-size: 12px;
+  padding-left: 20px;
+  padding-right: 40px;
+  position: relative; }
+  label.error:before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 16px;
+    height: 16px;
+    background-image: url(../img/validation.svg);
+    background-position: center center;
+    background-repeat: no-repeat; }
 
 /*# sourceMappingURL=style.css.map */
