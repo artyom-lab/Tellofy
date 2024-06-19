@@ -88,20 +88,20 @@ $(".datepicker").datepicker({
   onSelect: function(dateText, inst) {
     var selectedDate = $(this).datepicker("getDate");
     if (selectedDate) {
-      $(".btn-next").prop("disabled", false);
+      $("#tostep-5").prop("disabled", false);
       $("#tostep-5b").removeClass("disabled");
     } else {
-      $(".btn-next").prop("disabled", true); 
+      $("#tostep-5").prop("disabled", true); 
       $("#tostep-5b").addClass("disabled"); 
     }
   },
   onClose: function(dateText, inst) {
     var selectedDate = $(this).datepicker("getDate");
     if (!selectedDate && !$(this).val().trim()) {
-      $(".btn-next").prop("disabled", true); 
+      $("#tostep-5").prop("disabled", true); 
       $("#tostep-5b").addClass("disabled"); 
     } else {
-      $(".btn-next").prop("disabled", false); 
+      $("#tostep-5").prop("disabled", false); 
       $("#tostep-5b").removeClass("disabled");
     }
   }
@@ -114,7 +114,7 @@ $(".datepicker").datepicker({
 }).keyup(function(event) {
   if (event.keyCode == 8) { 
     $(this).val('');
-    $(".btn-next").prop("disabled", true); 
+    $("#tostep-5").prop("disabled", true); 
     $("#tostep-5b").addClass("disabled");
   }
 });
