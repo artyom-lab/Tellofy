@@ -134,7 +134,7 @@ a {
   flex-direction: column;
   flex-grow: 1;
   position: relative;
-  z-index: 2; }
+  z-index: 1000; }
 
 .steps {
   display: flex;
@@ -461,12 +461,9 @@ input::-webkit-inner-spin-button {
       font-size: 32px;
       text-align: center; } }
 
-.feedback-box {
-  position: relative;
-  z-index: 2; }
-  @media (max-width: 767.98px) {
-    .feedback-box {
-      text-align: center; } }
+@media (max-width: 767.98px) {
+  .feedback-box {
+    text-align: center; } }
 
 .ui-widget {
   font-family: inherit; }
