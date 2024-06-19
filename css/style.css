@@ -9,12 +9,10 @@ img {
 body {
   font-family: "Inter", sans-serif;
   background-color: #F2EDFF;
-  color: #1D253F; }
-  @media (min-width: 576px) {
-    body {
-      min-height: 100vh;
-      display: flex;
-      flex-direction: column; } }
+  color: #1D253F;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column; }
 
 a {
   text-decoration: none !important;
@@ -131,10 +129,8 @@ a {
 
 .main-section {
   display: flex;
-  flex-direction: column; }
-  @media (min-width: 576px) {
-    .main-section {
-      flex-grow: 1; } }
+  flex-direction: column;
+  flex-grow: 1; }
 
 .steps {
   display: flex;
@@ -148,10 +144,9 @@ a {
     flex-grow: 1; }
 
 .main-content {
-  padding: 120px 0 48px; }
-  @media (min-width: 576px) {
+  padding: 120px 0; }
+  @media (min-width: 1200px) {
     .main-content {
-      padding: 90px 0 140px;
       margin-top: auto;
       margin-bottom: auto; } }
 

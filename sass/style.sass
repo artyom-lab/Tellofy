@@ -25,10 +25,9 @@ body
 	font-family: 'Inter', sans-serif
 	background-color: $color-body
 	color: $color-dark
-	@media (min-width: 576px)
-		min-height: 100vh
-		display: flex 
-		flex-direction: column
+	min-height: 100vh
+	display: flex 
+	flex-direction: column
 
 a 
 	text-decoration: none !important
@@ -142,8 +141,7 @@ a
 .main-section
 	display: flex 
 	flex-direction: column
-	@media (min-width: 576px)
-		flex-grow: 1
+	flex-grow: 1
 
 .steps
 	display: flex 
@@ -157,9 +155,8 @@ a
 		flex-grow: 1
 
 .main-content
-	padding: 120px 0 48px
-	@media (min-width: 576px)
-		padding: 90px 0 140px
+	padding: 120px 0 
+	@media (min-width: 1200px)
 		margin-top: auto
 		margin-bottom: auto
 
