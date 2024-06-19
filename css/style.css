@@ -149,7 +149,7 @@ a {
 
 .main-content {
   padding: 120px 0; }
-  @media (min-width: 1200px) {
+  @media (min-width: 1980px) {
     .main-content {
       margin-top: auto;
       margin-bottom: auto; } }
