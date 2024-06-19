@@ -132,10 +132,12 @@ form1.addEventListener('change', () => {
 const textarea = document.querySelector("#form2 .form-textarea");
 const btn2 = document.getElementById('tostep-3');
 const arrow2 = document.getElementById('tostep-3b');
+const generated = document.querySelector("#form2 .generated");
 textarea.addEventListener("input", () => {
   const isTextareaFilled = textarea.value.trim() !== "";
   btn2.disabled = !isTextareaFilled;
   arrow2.classList.toggle('disabled', !isTextareaFilled);
+  generated.classList.toggle('d-none', !isTextareaFilled);
 });
 
 // STEP-3
