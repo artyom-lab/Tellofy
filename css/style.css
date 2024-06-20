@@ -1072,6 +1072,7 @@ label.error {
       .mfp-container .mfp-content .mfp-bottom-bar .mfp-title {
         color: #1D253F;
         font-size: 14px;
+        text-align: center;
         white-space: nowrap;
         text-overflow: ellipsis;
         overflow: hidden;
