@@ -6,7 +6,7 @@ document.addEventListener('DOMContentLoaded', function() {
     progressColor: '#440FCF',
     cursorWidth: 2,
     cursorHeight: 8,
-    cursorColor: '#4E5778',
+    cursorColor: '#1D253F',
     cursorRadius: 100,
     cursorOpacity: 1,
     barWidth: 2,

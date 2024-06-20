@@ -63,6 +63,13 @@ a
 		padding-left: 8px
 		padding-right: 8px
 
+.row-10
+	margin-left: -10px
+	margin-right: -10px
+	> [class*='col']
+		padding-left: 10px
+		padding-right: 10px
+
 .form-group
 	margin-bottom: 16px
 
@@ -370,7 +377,7 @@ a
 	font-size: 10px
 	color: $color-white
 	font-weight: bold
-	--bs-tooltip-bg: #1D253F
+	--bs-tooltip-bg: $color-dark
 
 .label-store
 	margin-bottom: 14px
@@ -878,17 +885,18 @@ input[type=number]
 			.vjs-play-progress
 				background: $color-violet2
 
-.video-delete
+.video-delete, .upload__img-delete, .upload__img-features
 	position: absolute
 	top: 12px
 	left: 12px
 	background: $color-white 
 	border-radius: 100px
-	width: 32px
-	height: 32px
+	width: 28px
+	height: 28px
 	border: 1px solid $color-border
 	text-align: center 
-	line-height: 26px
+	line-height: 24px
+	cursor: pointer
 	svg path 
 		transition: $transition
 	&:hover
@@ -914,3 +922,157 @@ label
 			background-image: url(../img/validation.svg)
 			background-position: center center
 			background-repeat: no-repeat
+
+// IMAGES UPLOADING 
+
+.images-uploading
+	.upload__box
+		.upload__btn-box
+			border: 1px solid $color-placeholder
+			border-radius: 8px
+			text-align: center
+			overflow: hidden
+			.upload__inputfile
+				position: absolute
+				top: 0
+				left: 0
+				right: 0
+				bottom: 0
+				opacity: 0
+				cursor: pointer
+			.upload__btn
+				position: relative
+				transition: $transition
+				&:hover 
+					opacity: .8
+				.upload-img
+					padding: 10px
+					display: flex 
+					height: 110px
+					border-bottom: 1px solid $color-placeholder
+					img 
+						margin: auto
+				.upload-text
+					font-size: 14px
+					padding: 8px
+					height: 36px
+					background: $color-white
+		.upload__img-box
+			flex: 0 0 auto
+			width: 33.33333333%
+			padding: 0 10px
+			margin-bottom: 20px
+			position: relative
+			text-align: center
+			order: -1 !important
+			@media (max-width: 575.98px)
+				width: 50%
+			.magnific-popup
+				height: 110px
+				display: block
+				border-radius: 8px 8px 0 0
+				border: 1px solid $color-placeholder
+				overflow: hidden
+				.img-bg 
+					background-repeat: no-repeat
+					background-position: center center
+					background-size: cover
+					position: relative
+					height: 100%
+			.upload__img-delete
+				left: 16px
+				top: 8px
+			.upload__img-features
+				top: 8px
+				right: 16px
+				left: auto
+			.upload__img-title
+				font-size: 14px
+				padding: 8px
+				height: 38px
+				background: $color-white
+				border-radius: 0 0 8px 8px
+				border: 1px solid $color-placeholder
+				border-top: 0
+				white-space: nowrap
+				text-overflow: ellipsis
+				overflow: hidden
+
+// MAGNIFIC POPUP
+
+.mfp-bg 
+	background: $color-dark
+.mfp-container
+	width: 40%
+	height: auto
+	top: 50%
+	left: 50%
+	transform: translate(-50%, -50%)
+	@media (max-width: 575.98px)
+		width: 100%
+		padding-left: 0
+		padding-right: 0
+		top: auto
+		left: auto
+		transform: none
+		bottom: 0
+	.mfp-arrow
+		background-position: center center
+		background-repeat: no-repeat
+		margin-top: 0
+		transform: translateY(-50%)
+		width: 40px
+		height: 40px
+		transition: $transition
+		&:before, &:after 
+			display: none !important
+		&.mfp-arrow-right
+			right: 28px
+			background-image: url(../img/arrow-big-right.svg)
+			@media (max-width: 575.98px)
+				right: 20px
+		&.mfp-arrow-left
+			left: 28px
+			background-image: url(../img/arrow-big-left.svg)
+			@media (max-width: 575.98px)
+				left: 20px
+	.mfp-content
+		background: $color-white
+		border-radius: 8px
+		padding: 52px 16px 16px
+		@media (max-width: 575.98px)
+			padding: 20px 20px 72px
+			border-radius: 8px 8px 0 0
+		.mfp-figure:after
+			display: none
+		.mfp-img
+			padding: 0
+			@media (min-width: 576px)
+				max-width: 80%
+		.mfp-close
+			right: 16px
+			padding: 3px
+			color: $color-violet
+			transition: $transition
+			cursor: pointer !important
+			width: auto
+			@media (max-width: 575.98px)
+				top: auto 
+				bottom: 22px
+		.mfp-bottom-bar
+			margin-top: 0
+			top: 0
+			@media (max-width: 575.98px)
+				top: auto
+				bottom: 0
+			.mfp-title
+				color: $color-dark
+				font-size: 14px
+				white-space: nowrap
+				text-overflow: ellipsis
+				overflow: hidden
+				padding: 16px 52px
+				@media (max-width: 575.98px)
+					padding: 16px 60px 32px
+			.mfp-counter
+				display: none

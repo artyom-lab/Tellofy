@@ -38,13 +38,19 @@ $('[data-bs-toggle="tooltip"]').on('click', function () {
   });
 
 // VIDEO
-  $('.video-to-text').click(function() {
+  $('.video-to').click(function() {
       $('.textarea-box').addClass('d-none');
       $('.video-recording').removeClass('d-none');
   });
   $('.video-delete').click(function() {
       $('.video-recording').addClass('d-none');
       $('.textarea-box').removeClass('d-none');
+  });
+
+// IMAGE
+  $('.image-to').click(function() {
+      $('.textarea-box').addClass('d-none');
+      $('.images-uploading').removeClass('d-none');
   });
 
 // ALL STEPS FUNCTIONALITY
@@ -355,7 +361,7 @@ function updateButtonState() {
 
   document.getElementById('phone').addEventListener('input', formatPhoneNumber);
 
-// VIDEO
+// VIDEO RECORDER
 
 var player = videojs('myVideo', {
     controls: true,
@@ -498,3 +504,96 @@ const bodyObserver = new MutationObserver((mutationsList) => {
 bodyObserver.observe(document.body, { attributes: true });
 
 });
+
+// IMAGES UPLOADING
+
+$(function () {
+  ImgUpload();
+});
+
+function ImgUpload() {
+  const imgWrap = $('.upload__img-wrap');
+  let imgArray = [];
+
+  function addImage(f) {
+    const reader = new FileReader();
+    reader.onload = function (e) {
+      const html = `<div class='upload__img-box'>
+                      <a class='magnific-popup' href='${e.target.result}' data-title='${f.name}'>
+                        <div style='background-image: url(${e.target.result})' data-file='${f.name}' class='img-bg'></div>
+                      </a>
+                      <div class='upload__img-delete'>
+                        <svg width="13" height="15" viewBox="0 0 16 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+                          <path d="M3.00018 18C2.45018 18 1.97935 17.8042 1.58768 17.4125C1.19602 17.0208 1.00018 16.55 1.00018 16V3H0.000183105V1H5.00018V0H11.0002V1H16.0002V3H15.0002V16C15.0002 16.55 14.8043 17.0208 14.4127 17.4125C14.021 17.8042 13.5502 18 13.0002 18H3.00018ZM5.00018 14H7.00018V5H5.00018V14ZM9.00018 14H11.0002V5H9.00018V14Z" fill="#AF91FF"/>
+                        </svg>
+                      </div>
+                      <div class='upload__img-features'>
+                        <svg width="9" height="14" viewBox="0 0 9 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                          <path d="M8.66666 12.0002C8.66666 12.9206 7.92047 13.6668 6.99999 13.6668C6.07952 13.6668 5.33333 12.9206 5.33333 12.0002C5.33333 11.0797 6.07952 10.3335 6.99999 10.3335C7.92047 10.3335 8.66666 11.0797 8.66666 12.0002ZM3.66666 12.0002C3.66666 12.9206 2.92047 13.6668 1.99999 13.6668C1.07952 13.6668 0.333328 12.9206 0.333328 12.0002C0.333328 11.0797 1.07952 10.3335 1.99999 10.3335C2.92047 10.3335 3.66666 11.0797 3.66666 12.0002ZM8.66666 7.00016C8.66666 7.92064 7.92047 8.66683 6.99999 8.66683C6.07952 8.66683 5.33333 7.92064 5.33333 7.00016C5.33333 6.07969 6.07952 5.3335 6.99999 5.3335C7.92047 5.3335 8.66666 6.07969 8.66666 7.00016ZM1.99999 8.66683C1.07952 8.66683 0.333328 7.92064 0.333328 7.00016C0.333328 6.07969 1.07952 5.3335 1.99999 5.3335C2.92047 5.3335 3.66666 6.07969 3.66666 7.00016C3.66666 7.44219 3.49107 7.86611 3.17851 8.17867C2.86595 8.49123 2.44202 8.66683 1.99999 8.66683ZM8.66666 2.00016C8.66666 2.92064 7.92047 3.66683 6.99999 3.66683C6.07952 3.66683 5.33333 2.92064 5.33333 2.00016C5.33333 1.07969 6.07952 0.333496 6.99999 0.333496C7.92047 0.333496 8.66666 1.07969 8.66666 2.00016ZM3.66666 2.00016C3.66666 2.92064 2.92047 3.66683 1.99999 3.66683C1.07952 3.66683 0.333328 2.92064 0.333328 2.00016C0.333328 1.07969 1.07952 0.333496 1.99999 0.333496C2.92047 0.333496 3.66666 1.07969 3.66666 2.00016Z" fill="#AF91FF"/>
+                        </svg>
+                      </div>
+                      <div class='upload__img-title'>${f.name}</div>
+                    </div>`;
+      imgWrap.append(html);
+      imgArray.push({ src: e.target.result, title: f.name });
+
+      toggleButtonState(); // Проверяем и переключаем состояние кнопки
+    };
+    reader.readAsDataURL(f);
+  }
+
+  function toggleButtonState() {
+    const button = $('#tostep-3');
+    if (imgArray.length > 0) {
+      button.removeAttr('disabled');
+    } else {
+      button.attr('disabled', 'disabled');
+    }
+  }
+
+  $('.upload__inputfile').on('change', function (e) {
+    const maxLength = parseInt($(this).attr('data-max_length'), 10);
+    const filesArr = Array.from(e.target.files);
+
+    filesArr.forEach(f => {
+      if (!f.type.startsWith('image/')) {
+        return;
+      }
+      if (imgArray.length >= maxLength) {
+        return false;
+      } else {
+        addImage(f);
+      }
+    });
+  });
+
+  imgWrap.magnificPopup({
+    delegate: 'a.magnific-popup',
+    type: 'image',
+    gallery: {
+      enabled: true
+    },
+    image: {
+      titleSrc: function(item) {
+        return item.el.attr('data-title');
+      }
+    },
+    callbacks: {
+      open: function() {
+        const magnificPopup = $.magnificPopup.instance;
+        magnificPopup.contentContainer.find('.mfp-title').text(this.currItem.el.attr('data-title'));
+      }
+    }
+  });
+
+  imgWrap.on('click', '.upload__img-delete', function (e) {
+    e.preventDefault();
+    const file = $(this).prev('.img-bg').data('file');
+    $(this).closest('.upload__img-box').remove();
+    imgArray = imgArray.filter(img => img.title !== file);
+    toggleButtonState(); // После удаления проверяем и переключаем состояние кнопки
+  });
+
+  // Инициализация состояния кнопки при загрузке страницы
+  toggleButtonState();
+}
