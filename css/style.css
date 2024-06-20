@@ -371,7 +371,7 @@ a {
   font-size: 10px;
   color: #FFF;
   font-weight: bold;
-  --bs-tooltip-bg: $color-dark; }
+  --bs-tooltip-bg: #1D253F; }
 
 .label-store {
   margin-bottom: 14px;
